@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: html-nginx-deployment
+  labels:
+    app: html-nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: html-nginx
+  template:
+    metadata:
+      labels:
+        app: html-nginx
+    spec:
+      containers:
+      - name: html-nginx
+        image: thethymca/html-tour-site:latest
+        ports:
+        - containerPort: 80
