@@ -16,7 +16,7 @@ pipeline {
                 echo "Image built successfully!"
             }
         }
-        stage (Docker image push) {
+        stage ('Docker image push') {
             steps {
                 echo "Image push process starting..."
                 withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable:'DOCKER_USER', passwordVariable:'DOCKER_PASS')]){
