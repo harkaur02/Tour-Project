@@ -28,4 +28,9 @@ pipeline {
             }
         }
     }
+    post {
+        success {
+            build job: 'helm-pipeline-new'
+        }
+    }
 }
