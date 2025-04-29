@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'docker-node-agent-label'
+    }
     environment {
         IMAGE_NAME = "thethymca/html-tour-site:${BUILD_NUMBER}"
         DOCKER_REGISTRY = "https://index.docker.io/v1"
