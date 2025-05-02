@@ -35,7 +35,7 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv("${SONARQUBE_SERVER}") {
-                    sh 'sonar-credentials'
+                    sh 'sonar-credentials1'
                 }
             }
         }
