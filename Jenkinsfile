@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'docker-node-agent-label label1'
+        label 'label1'
     }
     environment {
         IMAGE_NAME = "thethymca/html-tour-site:${BUILD_NUMBER}"
