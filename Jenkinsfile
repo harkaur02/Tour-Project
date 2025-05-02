@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Static Code Analysis') {
             environment {
-            SONARQUBE_SERVER = "http://99.79.161.110:9000/"
+            SONARQUBE_SERVER = "http://3.99.173.169:9000/"
             }
             steps {
                 withSonarQubeEnv("${SONARQUBE_SERVER}") {
