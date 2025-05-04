@@ -1,10 +1,9 @@
 pipeline {
-    agent {
-        label 'label1'
-    }
+    agent any
     environment {
         IMAGE_NAME = "thethymca/html-tour-site:${BUILD_NUMBER}"
         DOCKER_REGISTRY = "https://index.docker.io/v1"
+        SLACK_CHANNEL = '#jenkins'
     }
     stages {
         stage ('git checkout code'){
@@ -31,7 +30,7 @@ pipeline {
         }
         stage('Static Code Analysis') {
             environment {
-            SONARQUBE_SERVER = "http://3.99.173.169:9000/"
+            SONARQUBE_SERVER = "http://15.223.116.63:9000/"
             }
             steps {
                 withSonarQubeEnv("${SONARQUBE_SERVER}") {
@@ -42,7 +41,13 @@ pipeline {
     }
     post {
         success {
-            build job: 'helm-pipeline-new'
+            slackSend(channel: "${SLACK_CHANNEL}", message: "✅ *Pipeline Successful*: `${JOB_NAME}` build #${BUILD_NUMBER} (<${BUILD_URL}|View Build>)")
+        }
+        failure {
+            slackSend(channel: "${SLACK_CHANNEL}", message: "🚨 *Pipeline Failed*: `${JOB_NAME}` build #${BUILD_NUMBER} (<${BUILD_URL}|View Build>)")
+        }
+        always {
+            cleanWs()
         }
     }
 }
