@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    tools {
+    /* tools {
         sonarQubeScanner 'SonarScanner CLI'  // Name must match what you added in Jenkins
-    }
+    } */
     environment {
         IMAGE_NAME = "thethymca/html-tour-site:${BUILD_NUMBER}"
         DOCKER_REGISTRY = "https://index.docker.io/v1"
@@ -31,9 +31,9 @@ pipeline {
                 }
             }
         }
-        stage('SonarQube Scan') {
+        stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') {  // 'SonarQube' must match the server name in Jenkins config
+                withSonarQubeEnv('SonarQube') { // Make sure this name matches the one in Jenkins config
                     sh 'sonar-scanner'
                 }
             }
