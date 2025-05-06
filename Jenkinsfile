@@ -5,9 +5,6 @@ pipeline {
         DOCKER_REGISTRY = "https://index.docker.io/v1"
         SLACK_CHANNEL = '#jenkins-new'
     }
-    tools {
-        sonarQube 'SonarScanner'
-    }
     stages {
         stage ('git checkout code'){
             steps {
