@@ -5,6 +5,9 @@ pipeline {
         DOCKER_REGISTRY = "https://index.docker.io/v1"
         SLACK_CHANNEL = '#jenkins-new'
     }
+    tools {
+        sonarQube 'sonarqube-scanner'
+    }
     stages {
         stage ('git checkout code'){
             steps {
@@ -30,11 +33,11 @@ pipeline {
         }
         stage('Static Code Analysis') {
             environment {
-            SONARQUBE_SERVER = "http://34.55.129.26:9000/"
+            SONARQUBE_URL = "http://34.55.129.26:9000/"
             }
             steps {
                 echo "Sonarqube scan starting now..."
-                withSonarQubeEnv("${SONARQUBE_SERVER}") {
+                withSonarQubeEnv('sonarQube') {
                     sh 'sonar-credentials'
                 }
             }
