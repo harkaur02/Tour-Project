@@ -3,7 +3,7 @@ pipeline {
     environment {
         IMAGE_NAME = "thethymca/html-tour-site:${BUILD_NUMBER}"
         DOCKER_REGISTRY = "https://index.docker.io/v1"
-        SLACK_CHANNEL = '#jenkins'
+        SLACK_CHANNEL = '#jenkins-new'
     }
     stages {
         stage ('git checkout code'){
