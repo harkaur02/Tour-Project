@@ -4,7 +4,6 @@ pipeline {
         IMAGE_NAME = "thethymca/html-tour-site:${BUILD_NUMBER}"
         DOCKER_REGISTRY = "https://index.docker.io/v1"
         SLACK_CHANNEL = '#jenkins-new'
-        SONAR_TOKEN = credentials('sonar-credentials')
     }
     tools {
         sonarQube 'SonarScanner'
@@ -34,12 +33,10 @@ pipeline {
         }
         stage('SonarQube Scan') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh 'sonar-scanner'
-                }
+                withCredentials([string(credentialsId: 'sonar-credentials', variable: 'SONAR_TOKEN')]) {
+                sh 'sonar-scanner -Dsonar.login=$SONAR_TOKEN'
             }
         }
-
     }
     post {
         success {
