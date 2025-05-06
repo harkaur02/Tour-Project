@@ -33,6 +33,7 @@ pipeline {
             SONARQUBE_SERVER = "http://15.223.116.63:9000/"
             }
             steps {
+                echo "Sonarqube scan starting now..."
                 withSonarQubeEnv("${SONARQUBE_SERVER}") {
                     sh 'sonar-credentials1'
                 }
