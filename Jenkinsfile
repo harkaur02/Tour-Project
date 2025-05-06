@@ -7,7 +7,7 @@ pipeline {
         SONAR_TOKEN = credentials('sonar-credentials')
     }
     tools {
-        sonarQube 'SonarqubeScanner'
+        sonarQube 'SonarScanner'
     }
     stages {
         stage ('git checkout code'){
