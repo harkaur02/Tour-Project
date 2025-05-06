@@ -7,6 +7,7 @@ pipeline {
         IMAGE_NAME = "thethymca/html-tour-site:${BUILD_NUMBER}"
         DOCKER_REGISTRY = "https://index.docker.io/v1"
         SLACK_CHANNEL = '#jenkins-new'
+        SONAR_SCANNER_HOME = tool name: 'SonarScanner CLI', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
     }
     stages {
         stage ('git checkout code'){
