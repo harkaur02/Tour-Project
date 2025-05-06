@@ -32,14 +32,14 @@ pipeline {
                 }
             }
         }
-        stage('Static Code Analysis') {
+        stage('SonarQube Scan') {
             steps {
-                echo "Sonarqube scan starting now..."
                 withSonarQubeEnv('SonarQube') {
                     sh 'sonar-scanner'
                 }
             }
         }
+
     }
     post {
         success {
