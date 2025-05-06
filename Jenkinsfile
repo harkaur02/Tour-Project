@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Static Code Analysis') {
             environment {
-            SONARQUBE_SERVER = "http://35.238.9.170:9000/"
+            SONARQUBE_SERVER = "http://34.55.129.26:9000/"
             }
             steps {
                 echo "Sonarqube scan starting now..."
