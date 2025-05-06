@@ -35,7 +35,7 @@ pipeline {
             steps {
                 echo "Sonarqube scan starting now..."
                 withSonarQubeEnv("${SONARQUBE_SERVER}") {
-                    sh 'sonar-credentials1'
+                    sh 'sonar-credentials'
                 }
             }
         }
