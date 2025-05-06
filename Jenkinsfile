@@ -4,9 +4,10 @@ pipeline {
         IMAGE_NAME = "thethymca/html-tour-site:${BUILD_NUMBER}"
         DOCKER_REGISTRY = "https://index.docker.io/v1"
         SLACK_CHANNEL = '#jenkins-new'
+        SONAR_TOKEN = credentials('sonar-credentials')
     }
     tools {
-        sonarQube 'sonarqube-scanner'
+        sonarQube 'SonarqubeScanner'
     }
     stages {
         stage ('git checkout code'){
@@ -32,13 +33,10 @@ pipeline {
             }
         }
         stage('Static Code Analysis') {
-            environment {
-            SONARQUBE_URL = "http://34.55.129.26:9000/"
-            }
             steps {
                 echo "Sonarqube scan starting now..."
-                withSonarQubeEnv('sonarQube') {
-                    sh 'sonar-credentials'
+                withSonarQubeEnv('SonarQube') {
+                    sh 'sonar-scanner'
                 }
             }
         }
