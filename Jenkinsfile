@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        sonarQubeScanner 'SonarScanner CLI'  // Name must match what you added in Jenkins
+    }
     environment {
         IMAGE_NAME = "thethymca/html-tour-site:${BUILD_NUMBER}"
         DOCKER_REGISTRY = "https://index.docker.io/v1"
@@ -30,11 +33,18 @@ pipeline {
         }
         stage('SonarQube Scan') {
             steps {
+                withSonarQubeEnv('SonarQube') {  // 'SonarQube' must match the server name in Jenkins config
+                    sh 'sonar-scanner'
+                }
+            }
+        }
+        /* stage('SonarQube Scan') {
+            steps {
                 withCredentials([string(credentialsId: 'sonar-credentials', variable: 'SONAR_TOKEN')]) {
                 sh 'sonar-scanner -Dsonar.login=$SONAR_TOKEN'
                 }
             }
-        }
+        } */
     }
     post {
         success {
